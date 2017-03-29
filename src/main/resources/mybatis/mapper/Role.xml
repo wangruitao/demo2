@@ -19,9 +19,9 @@
 
     <select id="findByUserLoginName" resultMap="BaseResultMap"  >
         SELECT
-        <include refid="Base_Column_List" />
-        FROM role r inner join user_role ru on r.id=ru.role_id 
-       	inner join user u on ru.user_id = u.id where u.login_name=#{username}
+        r.id, r.role_name, r.role_code, r.remarker, r.disabled, r.create_time, r.update_time
+        FROM t_role r inner join t_user_role ru on r.id=ru.role_id 
+       	inner join t_user u on ru.user_id = u.id where u.login_name=#{username}
        	and r.disabled=0
     </select>
 

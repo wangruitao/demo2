@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class UserController extends BaseController {
 		return "user_list";
 	}
 	
+	@RequiresPermissions("user:save")
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String save(ModelMap model, User user) {
 		CredentialsSalt.encrypt(user);
@@ -37,6 +39,7 @@ public class UserController extends BaseController {
 		return "redirect:/user/list.html";
 	}
 	
+	@RequiresPermissions("user:edit")
 	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
 	public String edit(ModelMap model, @PathVariable("id") Long id) {
 		User user = userService.findByUserId(id);
@@ -44,6 +47,7 @@ public class UserController extends BaseController {
 		return "user_add";
 	}
 	
+	@RequiresPermissions("user:add")
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String add(ModelMap model) {
 		User user = new User();
@@ -51,12 +55,14 @@ public class UserController extends BaseController {
 		return "user_add";
 	}
 	
+	@RequiresPermissions("user:update")
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(User user) {
 		boolean isSuc = userService.update(user);
 		return "redirect:/user/list.html";
 	}
 	
+	@RequiresPermissions("user:delete")
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> delete( Long id) {
