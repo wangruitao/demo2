@@ -4,7 +4,7 @@ import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -43,18 +43,31 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	
 	
 
-	@Override
+	@Bean
+	public ContentNegotiationManagerFactoryBean contentNegotiationManager() {
+		ContentNegotiationManagerFactoryBean contentNegotiationManager = new ContentNegotiationManagerFactoryBean();
+		contentNegotiationManager.setFavorPathExtension(true);
+		contentNegotiationManager.setUseJaf(false);
+		contentNegotiationManager.setFavorParameter(false);
+		contentNegotiationManager.setParameterName("mediaType");
+		contentNegotiationManager.setIgnoreAcceptHeader(true);
+		contentNegotiationManager.setDefaultContentType(MediaType.TEXT_HTML);
+		contentNegotiationManager.addMediaType("json", MediaType.APPLICATION_JSON);
+		contentNegotiationManager.addMediaType("xml", MediaType.APPLICATION_XML);
+		return contentNegotiationManager;
+	}
+	
+	/*@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 		//开启对/blog/123.json的支持
 		configurer.favorPathExtension(true).useJaf(false)
 		//关闭 /blog/123?format=json 的支持
 		.favorParameter(false).parameterName("mediaType")
-		.ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON)
+		.ignoreAcceptHeader(true).defaultContentType(MediaType.TEXT_HTML)
 		.mediaType("json", MediaType.APPLICATION_JSON)
-		.mediaType("xml", MediaType.APPLICATION_XML)
-		.mediaType("html", MediaType.TEXT_HTML);
+		.mediaType("xml", MediaType.APPLICATION_XML);
 		
-	}
+	}*/
 
 	//web 相关配置
 	@Bean

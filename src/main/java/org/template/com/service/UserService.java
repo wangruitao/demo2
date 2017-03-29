@@ -15,5 +15,11 @@ public interface UserService  {
 
 	User save(User user);
 
+	User findByUserId(Long id);
+
+	boolean update(User user);
+
+	boolean delete(Long id);
+
 	
 }

@@ -25,3 +25,7 @@ out
 
 
 /target/
+/.classpath
+/.project
+/mvnw
+/mvnw.cmd

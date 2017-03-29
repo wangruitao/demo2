@@ -8,7 +8,11 @@ public interface UserMapper {
 
 	List<User> findByUserParam(User user);
 
-	User insert(User user);
+	Long insert(User user);
+
+	int update(User user);
+
+	int delete(Long id);
 
 
 }

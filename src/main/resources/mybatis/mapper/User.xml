@@ -11,8 +11,8 @@
 		<result column="salt" property="salt" />
 		<result column="locked" property="locked" />
 		<result column="disabled" property="disabled"  />
-		<result column="create_time" property="createTime" />
-		<result column="update_time" property="updateTime" />
+		<result column="create_time" property="createTime" javaType="DATETIME"/>
+		<result column="update_time" property="updateTime" javaType="TIMESTAMP"/>
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -24,6 +24,9 @@
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM t_user where 1=1 
+		<if test="id!=null">
+			and id = #{id}
+		</if>
 		<if test="userName!=null">
 			and user_name like #{userName}
 		</if>
@@ -35,12 +38,11 @@
 		</if>
 	</select>
 
-	<select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
-		SELECT
-		<include refid="Base_Column_List" />
-		FROM users
+	<delete id="delete" parameterType="java.lang.Long">
+		delete
+		FROM t_user
 		WHERE id = #{id}
-	</select>
+	</delete>
 
 	<select id="loadUserByUsername" parameterType="java.lang.String"
 		resultMap="BaseResultMap">
@@ -58,16 +60,18 @@
 		(user_name, login_name, password, salt, create_time)
 		VALUES
 		(#{userName},
-		#{loginName}, #{password}, #{salt}, #{create_time})
+		#{loginName}, #{password}, #{salt}, #{createTime})
 	</insert>
 
 	<update id="update" parameterType="org.template.com.model.User">
-		UPDATE users 
+		UPDATE t_user
 		<trim prefix="set" suffixOverrides=",">
-		<if test="name != null">user_name = #{name},</if>
-		<if test="userPassword != null">user_password = #{userPassword},</if>
-		<if test="userLevel != null">user_level = #{userLevel},</if>
-		<if test="userLoc != null">user_loc = #{userLoc},</if>
+		<if test="userName != null">user_name = #{userName},</if>
+		<if test="loginName != null">login_name = #{loginName},</if>
+		<if test="password != null">password = #{password},</if>
+		<if test="salt != null">salt = #{salt},</if>
+		<if test="locked != null">locked = #{locked},</if>
+		<if test="disabled != null">disabled = #{disabled},</if>
 		</trim>
 		WHERE id = #{id}
 	</update>

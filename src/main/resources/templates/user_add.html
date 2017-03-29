@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<title>shiro</title>
+<script type="text/javascript" src="${basePath}/static/js/jquery.min.js"></script>
+<link href="${basePath}/static/css/comm.css" rel="stylesheet"
+	style="text/css" />
+
+</head>
+<body>
+<form action="${basePath}/user/<#if pojo.id??>update.html<#else>save.html</#if>" method="POST">
+<input type="hidden" id="id" name="id" value="${pojo.id!}">
+    <table>
+        <tr>
+            <td><label for="txtname">姓名：</label></td>
+            <td><input type="text" id="userName" name="userName" value="${pojo.userName!}"/></td>
+        </tr>
+        <tr>
+            <td><label for="txtname">账号：</label></td>
+            <td><input type="text" id="loginName" name="loginName" value="${pojo.loginName!}"/></td>
+        </tr>
+        <tr>
+            <td><label for="txtpswd">密码：</label></td>
+            <td><input type="text" id="password" name="password" <#if pojo.id??> disabled="disabled" </#if> /></td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <input type="reset" />
+                <input type="submit" />
+            </td>
+        </tr>
+    </table>
+</form> 
+</body>
+<script type="text/javascript">
+function submit() {
+	
+		 var userInfo = {  
+	                "userName" : $("#userName").val(),  
+	                "loginName" : $("#loginName").val(),  
+	                "password" : $("#password").val() 
+	            }; 
+	$.ajax({
+	    type: 'post',
+	    url: '${basePath}/user/save.html',
+	    contentType: "application/json;charset=utf-8",
+	    data: JSON.stringify(userInfo),
+	    success: function(data) {
+	        // your code
+	    }
+	});
+}
+</script>
+</html>

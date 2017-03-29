@@ -42,10 +42,11 @@ public class ExceptionHandlerAdvice {
 	@ResponseBody
 	public void handleBaseException(HttpServletRequest request, HttpServletResponse response, Exception e) {
 
+		
+		log.error("全局异常处理错误", e);
 		try {
 			outputMessage(response, HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
 		} catch (IOException e1) {
-			log.error("全局异常处理错误", e1);
 			throw new RuntimeException(e1);
 		}
 	}

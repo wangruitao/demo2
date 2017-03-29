@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>shiro</title>
+<script type="text/javascript" src="${basePath}/static/js/jquery.min.js"></script>
+<link href="${basePath}/static/css/comm.css" rel="stylesheet"
+	style="text/css" />
+
+</head>
+<body>
+	<a href="${basePath}/user/add.html">添加</a>
+	<table border="1">
+		<tr>
+			<th>用户名</th>
+			<th>账号</th>
+			<th>锁定</th>
+			<th>禁用</th>
+			<th>操作</th>
+		</tr>
+		<#list users as user>
+		<tr>
+			<td>${user.userName}</td>
+			<td>${user.loginName}</td>
+			<td>${user.locked}</td>
+			<td>${user.disabled}</td>
+			<td><button onclick="deleteById(${user.id})" value="删除">删除</button>
+				| <a href="${basePath}/user/edit/${user.id}.html">修改</a></td>
+		</tr>
+		</#list>
+	</table>
+</body>
+
+<script type="text/javascript">
+function deleteById(id) {
+	$.ajax({
+        type: "post",
+        url: "${basePath}/user/delete.json",
+//      data: "para="+para,  此处data可以为 a=1&b=2类型的字符串 或 json数据。
+        data: {"id":id},
+        async : false,
+        dataType: "json",
+        success: function (data ,textStatus, jqXHR)
+        {
+            if(data.isSuc){
+               alert("删除成功！");
+               location.reload();
+            }else{
+            	alert("删除失败！");
+            }
+        },
+        error:function (XMLHttpRequest, textStatus, errorThrown) {      
+            alert("请求失败！");
+        }
+     });
+}
+</script>
+</html>
