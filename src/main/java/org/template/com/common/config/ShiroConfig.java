@@ -128,7 +128,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("/login.html");
         
-        Map<String, Filter> filters = new LinkedHashMap<>();
+        Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         
         LogoutFilter logoutFilter = new LogoutFilter();
         logoutFilter.setRedirectUrl("/login.html");

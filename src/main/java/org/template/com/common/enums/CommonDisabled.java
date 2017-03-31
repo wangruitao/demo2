@@ -1,4 +1,4 @@
-package org.template.com.model.enums;
+package org.template.com.common.enums;
 
 
 public enum CommonDisabled {

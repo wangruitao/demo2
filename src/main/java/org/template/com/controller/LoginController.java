@@ -11,19 +11,18 @@ import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.template.com.common.util.StringUtil;
-import org.template.com.model.User;
+import org.template.com.vo.LoginVo;
 
 @Controller
 public class LoginController extends BaseController{
 
 	@RequestMapping(path="/login")
-	public String login(@RequestParam(value="name", required=false) String name, @RequestParam(value="password", required=false) String password) {
+	public String login(LoginVo login) {
 		Subject subject = subject();
-		if(StringUtil.isNotEmpty(name) && StringUtil.isNotEmpty(password)) {
+		if(login != null && StringUtil.isNotEmpty(login.getName()) && StringUtil.isNotEmpty(login.getPassword())) {
 			
-			UsernamePasswordToken token = new UsernamePasswordToken(name, password);
+			UsernamePasswordToken token = new UsernamePasswordToken(login.getName(), login.getPassword());
 			try {
 				subject.login(token);
 			} catch (IncorrectCredentialsException e) {
