@@ -95,6 +95,11 @@ public class MybatisAutoConfiguration {
         return new SqlSessionTemplate(sqlSessionFactory,
                 this.properties.getExecutorType());
     }
+    
+   @Bean
+   public SqlMapper sqlMapper(SqlSessionFactory sqlSessionFactory) {
+	   return new SqlMapper(sqlSessionFactory.openSession());
+   }
 
     /**
      * 分页插件
