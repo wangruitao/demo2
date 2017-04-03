@@ -11,9 +11,10 @@ public interface RoleMapper  extends MyMapper<Role>{
 
 	public String column = "id, role_name, role_code, remarker, disabled, create_time, update_time";
 	
-	@Select("r.id, r.role_name, r.role_code, r.remarker, r.disabled, r.create_time, "
-			+ " r.update_time FROM t_role r inner join t_user_role ru on r.id=ru.role_id  "
-			+ "inner join t_user u on ru.user_id = u.id where u.login_name=#{username} and r.disabled=0")
+	@Select("select r.id, r.role_name roleName, r.role_code roleCode, r.remarker, r.disabled, r.create_time createTime, "
+			+ " r.update_time updateTime FROM t_role r inner join t_user_role ru on r.id=ru.role_id  "
+			+ "inner join t_user u on ru.user_id = u.id where u.login_name=#{userName} and r.disabled=0")
+//	@SelectProvider(type=org.template.com.mapper.RoleProvider.class, method="findByUserLoginName")
 	List<Role> findByUserLoginName(@Param("userName") String userName);
 
 }

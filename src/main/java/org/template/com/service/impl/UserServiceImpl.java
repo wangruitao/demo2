@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.template.com.common.enums.CommonDisabled;
+import org.template.com.common.enums.CommonDisabledEnums;
+import org.template.com.common.enums.UserLockedEnums;
 import org.template.com.mapper.RoleMapper;
 import org.template.com.mapper.UserMapper;
 import org.template.com.model.User;
@@ -38,13 +39,15 @@ public class UserServiceImpl implements UserService {
 	public List<User> findAll() {
 		
 		User user = new User();
-		user.setDisabled(CommonDisabled.DISABLE_FALSE.getFlag());
+		user.setDisabled(CommonDisabledEnums.DISABLE_FALSE.getFlag());
 		return userMapper.selectAll();
 	}
 
 	@Override
 	public User save(User user) {
 		user.setCreateTime(new Date());
+		user.setLocked(UserLockedEnums.LOCKED_FALSE.getFlag());
+		user.setDisabled(CommonDisabledEnums.DISABLE_FALSE.getFlag());
 		userMapper.insert(user);
 		return user;
 	}
@@ -60,7 +63,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean update(User user) {
 		
-		return userMapper.updateByPrimaryKey(user) > 0;
+		return userMapper.updateByPrimaryKeySelective(user) > 0;
 	}
 
 	@Override

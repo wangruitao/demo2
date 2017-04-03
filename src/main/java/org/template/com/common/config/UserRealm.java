@@ -17,7 +17,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.template.com.common.enums.CommonDisabled;
+import org.template.com.common.enums.CommonDisabledEnums;
 import org.template.com.model.Role;
 import org.template.com.model.User;
 import org.template.com.service.PermissionService;
@@ -44,7 +44,7 @@ public class UserRealm extends AuthorizingRealm {
 			throw new UnknownAccountException();//没找到帐号 
 		}
 		
-		if(user.getDisabled().equals(CommonDisabled.DISABLE_TRUE.getFlag())) {
+		if(user.getDisabled().equals(CommonDisabledEnums.DISABLE_TRUE.getFlag())) {
 			throw new DisabledAccountException(); //帐号锁定 
 		}
 		

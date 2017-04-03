@@ -9,7 +9,7 @@ import org.template.com.model.Permission;
 
 public interface PermissionMapper  extends MyMapper<Permission>{
 
-	@Select("select p.id, p.permission_name, p.permission_code, p.permission_url, p.disabled, p.create_time, p.update_time "
+	@Select("select p.id, p.permission_name permissionName, p.permission_code permissionCode, p.permission_url permissionUrl, p.disabled, p.create_time createTime, p.update_time updateTime "
 			+ " from t_permission p inner join t_role_permission rp on p.id=rp.permission_id inner join t_role r on rp.role_id=r.id "
 			+ " where r.id in (${roleids}) "
 			+ " and r.disabled=0 and p.disabled=0")

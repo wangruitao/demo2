@@ -1,7 +1,7 @@
 package org.template.com.common.enums;
 
 
-public enum CommonDisabled {
+public enum CommonDisabledEnums {
 
 	DISABLE_TRUE("禁用", 1),
 	DISABLE_FALSE("未禁用", 0);
@@ -9,7 +9,7 @@ public enum CommonDisabled {
 	private String description;
 	private Integer flag;
 	
-	private CommonDisabled(String description, Integer flag) {
+	private CommonDisabledEnums(String description, Integer flag) {
 		this.description = description;
 		this.flag = flag;
 	}
@@ -32,7 +32,7 @@ public enum CommonDisabled {
 	
 	public static String getDescription(Integer flag) {
 		
-		for(CommonDisabled cd : CommonDisabled.values()) {
+		for(CommonDisabledEnums cd : CommonDisabledEnums.values()) {
 			if(cd.getFlag().equals(flag)) {
 				return cd.getDescription();
 			}

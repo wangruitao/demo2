@@ -141,6 +141,7 @@ public class ShiroConfig {
 //        filterChainDefinitionManager.put("/events/**", "authc,roles[ROLE_ADMIN]");
 //        filterChainDefinitionManager.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取，此处是用权限控制
 
+        filterChainDefinitionManager.put("/login.html", "anon");
         filterChainDefinitionManager.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
 
