@@ -49,7 +49,7 @@ public class LoginController extends BaseController{
 			}
 		}
 		if(subject.isAuthenticated()) {
-			return "/index";
+			return "redirect:/index.html";
 		} 
 		return "login";
 	}

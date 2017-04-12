@@ -1,12 +1,9 @@
 package org.template.com.common.config;
 
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
-import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -21,8 +18,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/login.html").setViewName("login");
-		registry.addViewController("/index.html").setViewName("index");
 		registry.addViewController("/").setViewName("index");
+		registry.addViewController("/ws/ws.html").setViewName("ws");
+		registry.addViewController("/chatroom/chat.html").setViewName("chat");
 	}
 
 	@Bean
@@ -70,7 +68,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	}*/
 
 	//web 相关配置
-	@Bean
+/*	@Bean
 	public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
 		ServletRegistrationBean registration = new ServletRegistrationBean(dispatcherServlet);
 		registration.getUrlMappings().clear();
@@ -85,5 +83,5 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registration.addUrlMappings("*.gif");
 		return registration;
 	}
-	
+	*/
 }

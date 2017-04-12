@@ -142,11 +142,13 @@ public class ShiroConfig {
 //        filterChainDefinitionManager.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取，此处是用权限控制
 
         filterChainDefinitionManager.put("/login.html", "anon");
+        filterChainDefinitionManager.put("/ws/**", "anon");
+        filterChainDefinitionManager.put("/static/**", "anon");
         filterChainDefinitionManager.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
 
 
-        shiroFilterFactoryBean.setSuccessUrl("/index.html");
+//        shiroFilterFactoryBean.setSuccessUrl("/index.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         return shiroFilterFactoryBean;
     }
