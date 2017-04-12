@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta charset="UTF-8" />
+<head>
+<title>Home</title>
+<script type="text/javascript" src="${basePath}/static/js/sockjs.min.js"></script>
+<script type="text/javascript" src="${basePath}/static/js/stomp.min.js"></script>
+<script type="text/javascript" src="${basePath}/static/js/jquery.js"></script>
+<script type="text/javascript" src="${basePath}/static/js/jquery-1.2.6.pack.js"></script>
+<script type="text/javascript" src="${basePath}/static/js/jquery.messager.js"></script>
+</head>
+<body>
+	<p>接受信息</p>
+
+	<script type="text/javascript">
+	
+		//链接endpoint名称为 "/endpointChat" 的endpoint。
+		var sock = new SockJS("${basePath}/endpointPrompt");
+		var stomp = Stomp.over(sock);
+		stomp.connect('guest', 'guest', function(frame) {
+
+			/**  订阅了/user/queue/notifications 发送的消息,这里雨在控制器的 convertAndSendToUser 定义的地址保持一致, 
+			 *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
+			 *  */
+			stomp.subscribe("/user/prompt/notifications", handleNotification);
+		});
+
+		function handleNotification(message) {
+			$.messager.lays(300, 200);
+			$.messager.show(0, '<a href="#">' + message.body + '</a><br>亮仔开不开心啊？好开心！！！');
+		}
+
+	</script>
+
+	<div id="output"></div>
+</body>
+</html>

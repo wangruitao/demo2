@@ -17,6 +17,20 @@ function oncl() {
          }
      });
 }
+
+function prompt() {
+	 $.ajax({
+         type: "get",
+         url: root + "/prompt.json",
+         contentType: "application/json; charset=utf-8",
+         success: function(data){
+        	 if(data.isSuc) {
+        		 alert("发送成功！");
+        	 }
+         }
+     });
+}
+
 </script>
 </head>
 <body>
@@ -25,6 +39,8 @@ function oncl() {
 	<h2><a href="${basePath}/user/list.html">用户菜单</a></h2>
 	<h2><a href="${basePath}/ws/ws.html">websocket</a></h2>
 	<h2><a href="${basePath}/chatroom/chat.html">聊天室</a></h2>
+	<h2><a href="${basePath}/prompt/prompt.html">提示信息</a></h2>
+	<h2><button onclick="prompt()" value="发送提示消息">发送提示消息</button></h2>
 	<h2><a href="${basePath}/logout.html">退出</a></h2>
 	
 </body>

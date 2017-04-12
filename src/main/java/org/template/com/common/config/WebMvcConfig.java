@@ -21,6 +21,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/").setViewName("index");
 		registry.addViewController("/ws/ws.html").setViewName("ws");
 		registry.addViewController("/chatroom/chat.html").setViewName("chat");
+		registry.addViewController("/prompt/prompt.html").setViewName("messageprompt");
 	}
 
 	@Bean
