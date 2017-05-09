@@ -20,12 +20,12 @@ public class CredentialsSalt {
 		user.setSalt(salt);
 	}
 	
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		String salt1 = "tom"; 
 		String salt2 = new SecureRandomNumberGenerator().nextBytes().toHex(); 
 		String salt = salt1 + salt2;
 		SimpleHash hash = new SimpleHash(ALGORITHM_NAME, "123456", salt, hashIterations);  
 		String encodedPassword = hash.toHex(); 
 		System.out.println(salt + "===================" + encodedPassword);
-	}
+	}*/
 }

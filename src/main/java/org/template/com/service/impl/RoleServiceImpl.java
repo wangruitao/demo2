@@ -39,7 +39,7 @@ public class RoleServiceImpl implements RoleService{
 				+ " r.update_time update_time  FROM t_role r inner join t_user_role ru on r.id=ru.role_id  "
 				+ "inner join t_user u on ru.user_id = u.id where u.login_name=#{userName} and r.disabled=0";
 		List<Role> roles = sqlMapper.selectList(sql, userName, Role.class);
-//		List<Role> roles = roleMapper.findByUserLoginName(userName);
+		List<Role> rolesl = roleMapper.findByUserLoginName(userName);
 		Set<Role> roleSet = new HashSet<Role>();
 		roleSet.addAll(roles);
 		return roleSet;

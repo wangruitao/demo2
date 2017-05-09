@@ -60,7 +60,7 @@ public class EncryptUtils {
         return dstr;    
     }    
         
-    public static void main(String[] args) throws IOException {    
+/*    public static void main(String[] args) throws IOException {    
         String user = "oneadmin";    
         System.out.println("原始字符串 " + user);    
         System.out.println("MD5加密 " + encodeMD5String(user));    
@@ -68,5 +68,5 @@ public class EncryptUtils {
         String base64Str = encodeBase64String(user);    
         System.out.println("Base64加密 " + base64Str);    
         System.out.println("Base64解密 " + decodeBase64String(base64Str));    
-    }   
+    }   */
 }
