@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.template.com.common.annotation.LogInfo;
 import org.template.com.common.util.CredentialsSalt;
 import org.template.com.model.User;
 import org.template.com.service.UserService;
@@ -24,6 +25,7 @@ public class UserController extends BaseController {
 	@Autowired
 	private UserService userService;
 
+	@LogInfo("测试我的")
 	@RequestMapping("/list")
 	public String list(ModelMap model) {
 		List<User> list = userService.findAll();
